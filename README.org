@@ -1,0 +1,7 @@
+#+AUTHOR: LigerLearn
+#+TITLE: Emacs from scratch
+
+* Introduction
+
+This repository contains materials and notes for the LigerLearn Emacs from scratch course
+
