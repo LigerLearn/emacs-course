@@ -1,8 +1,11 @@
 #+AUTHOR: LigerLearn
 #+TITLE: Emacs from scratch
 
-* Introduction
+This repository contains materials and notes for the LigerLearn /*Emacs from scratch*/ course.
 
-This repository contains materials and notes for the LigerLearn Emacs from scratch course
+This document is a /cheat sheet/ for Emacs which you can use throughout the course as well in
+the future for reference.
 
+The course can be found at https://ligerlearn.com/course/emacs-from-scratch/
+Follow along to learn all about how you can make use of Emacs in your workflow today!
 
