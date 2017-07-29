@@ -1,12 +1,13 @@
 #+AUTHOR: LigerLearn
 #+TITLE: Emacs from scratch
 
-This repository contains materials and notes for the LigerLearn /*Emacs from scratch*/ course.
+This repository contains materials and notes for the LigerLearn [[https://ligerlearn.com/course/emacs-from-scratch/][/Emacs from scratch/]] course.
 
 This document is a /cheat sheet/ for Emacs which you can use throughout the course as well in
 the future for reference.
 
-The course can be found at https://ligerlearn.com/course/emacs-from-scratch/
+The course can be found at https://ligerlearn.com/course/emacs-from-scratch/.
+
 Follow along to learn all about how you can make use of Emacs in your workflow today!
 
 * C-q prefix
@@ -35,7 +36,33 @@ radix you would like to use:
   (setq read-quoted-char-radix 16) ; for hexadecimal
 #+END_SRC
 
+* Line wrapping
 
+You can think of lines in two ways:
+- Logical line: this is all the text up to the point where press the enter key
+- Visual/screen line: this is all the text that can fit on one visual line on the screen in emacs
 
+If the logical line is too big to fit in a visual line in your Emacs window then the default
+behaviour is to wrap the line. The wrapped line will be indicated by arrows in the window
+fringes (if you are using the GUI) or backslashes (if you are using Emacs in the terminal).
 
+Certain commands such as go to the beginning of the line (C-a or HOME) will operate on the
+logical line rather than the visual line. To get commands that usually operate on the logical
+line to operate on the screen line you can enter visual line mode:
 
+#+BEGIN_SRC emacs-lisp
+  ; Toggle on/off
+  M-x visual-line-mode
+
+  ; Show the left and right arrow in the window fringes for lines which are wrapped
+  ; even when using visual line mode
+  (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+#+END_SRC
+
+An alternative to wrapping lines is to truncate them. You can choose to truncate lines by
+toggling on truncate-lines:
+
+#+BEGIN_SRC emacs-lisp
+  ; Toggle on/off line truncating
+  M-x toggle-truncate-lines
+#+END_SRC
