@@ -1,7 +1,7 @@
 #+AUTHOR: LigerLearn
 #+TITLE: Emacs from scratch
 
-This repository contains materials and notes for the LigerLearn [[https://ligerlearn.com/course/emacs-from-scratch/][/Emacs from scratch/]] course.
+This repository contains materials and notes for the LigerLearn [[https://ligerlearn.com/course/emacs-from-scratch/][Emacs from scratch]] course.
 
 This document is a /cheat sheet/ for Emacs which you can use throughout the course as well in
 the future for reference.
@@ -10,31 +10,51 @@ The course can be found at https://ligerlearn.com/course/emacs-from-scratch/.
 
 Follow along to learn all about how you can make use of Emacs in your workflow today!
 
-* C-q prefix
+* Files
 
-| Key binding                      | Function            |
-|----------------------------------+---------------------+
-| C-q C-<letter-in-caret-notation> | (quoted-insert ARG) |
-| C-q <octal-number> RET           | (quoted-insert ARG) |
+** Opening files
+| Key Binding             | Function                 | Description                                                                             |
+|-------------------------+--------------------------+-----------------------------------------------------------------------------------------|
+| C-x C-f                 | (find-file)              | Visit a file                                                                            |
+| C-x C-r                 | (find-file-read-only)    | Visit a file for viewing, without allowing changes to it                                |
+| C-x C-v                 | (find-alternate-file)    | Visit a different file instead of the one visited last                                  |
+| C-x 4 f                 | (find-file-other-window) | Visit a file, in another window - Don't alter what is  displayed in the selected window |
+| C-x 5 f                 | (find-file-other-frame)  | Visit a file, in a new frame - Don't alter what is  displayed in the selected frame     |
+| M-x find-file-literally | (find-file-literally)    | Visit a file with no conversion of the contents                                         |
 
-The ~C-q~ prefix allows you to enter characters (ASCII control characters or otherwise) in a
-convenient way.
-- For example:
- - ~C-q C-<letter-in-caret-notation>~
-   - ~C-q C-@~ inserts ~^@~ 
-   - ~C-q C-A~ inserts ~^A~
- - ~C-q <octal-number> RET~
-  - ~C-q 0 RET~ inserts ~^@~
-  - ~C-q 1 RET~ inserts ~^A~
+The find file command is bound to the key sequence ~C-x C-f~ and is probably the main method
+you will end up using to open up files in Emacs. There are a few key things you should know
+about ~C-x C-f~:
+- If you choose to open the path leading to a directory rather than a file then Emacs will open
+  up a DirEd buffer for that directory
+- If you give it a path to a file which does not exist then Emacs will create a buffer named
+  after that file.
 
-If you do not want to be entering octal numbers you can set ~read-quoted-char-radix~ to the
-radix you would like to use:
+~C-x C-v~, which runs the (find-alternate-file) command is a useful keybinding to know:
+- This is convenient for the situation where you have accidentally opened the wrong file or a
+  file which does not exist by accident.
+- Here rather than using ~C-x C-f~ to open the correct file and have two buffers you can just
+  use ~C-x C-v~ to select the correct file and the buffer you ran the command from will be
+  automatically replaced with the new one.
 
-#+BEGIN_SRC emacs-lisp
-  (setq read-quoted-char-radix 8)  ; for octal
-  (setq read-quoted-char-radix 10) ; for decimal
-  (setq read-quoted-char-radix 16) ; for hexadecimal
-#+END_SRC
+
+*** Alternative ways of opening files
+
+In addition to the main method of opening files using ~C-x C-f~ there a number of alternative
+ways you can open file in Emacs (these are largely only possible if you are running a graphical
+Emacs session):
+1. Drag and drop a file from your file explorer into Emacs
+   - On Windows the file explorer would be Windows Explorer, on Mac OS X it would be the finder. 
+2. Set file associations to Emacs so that you can simply open the file directly in Emacs
+3. Use the menu bar at the top of Emacs to click ~File -> Open File~ and then navigate to the
+   file and choose to open it.
+
+** Saving files
+
+| Key Binding | Function      | Description                                              |
+|-------------+---------------+----------------------------------------------------------|
+| C-x C-s     | (save-buffer) | Saves the current buffer to file if it has been modified |
+| C-x C-w     | (write-file)  | Save the current buffer as another file                  |
 
 * Line wrapping
 
@@ -66,3 +86,30 @@ toggling on truncate-lines:
   ; Toggle on/off line truncating
   M-x toggle-truncate-lines
 #+END_SRC
+* C-q prefix
+
+| Key binding                      | Function            |
+|----------------------------------+---------------------+
+| C-q C-<letter-in-caret-notation> | (quoted-insert ARG) |
+| C-q <octal-number> RET           | (quoted-insert ARG) |
+
+The ~C-q~ prefix allows you to enter characters (ASCII control characters or otherwise) in a
+convenient way.
+- For example:
+ - ~C-q C-<letter-in-caret-notation>~
+   - ~C-q C-@~ inserts ~^@~ 
+   - ~C-q C-A~ inserts ~^A~
+ - ~C-q <octal-number> RET~
+  - ~C-q 0 RET~ inserts ~^@~
+  - ~C-q 1 RET~ inserts ~^A~
+
+If you do not want to be entering octal numbers you can set ~read-quoted-char-radix~ to the
+radix you would like to use:
+
+#+BEGIN_SRC emacs-lisp
+  (setq read-quoted-char-radix 8)  ; for octal
+  (setq read-quoted-char-radix 10) ; for decimal
+  (setq read-quoted-char-radix 16) ; for hexadecimal
+#+END_SRC
+
+
